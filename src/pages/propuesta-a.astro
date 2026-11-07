@@ -1,0 +1,58 @@
+---
+// Boceto temporal (ver docs/propuestas-hero.md). Borrar al elegir dirección.
+import '@fontsource-variable/bricolage-grotesque/wdth.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { whatsappUrl } from '../data/site';
+---
+
+<BaseLayout title="Propuesta A: La historia | Markim">
+  <section class="relative mx-auto flex min-h-[calc(100svh-7rem)] max-w-7xl flex-col justify-end md:grid md:min-h-0 md:grid-cols-[1fr_22rem] md:items-center md:gap-16 md:px-10 md:py-20">
+    <!-- La "story": fondo a pantalla completa en celular, marco 9:16 en escritorio -->
+    <div class="story absolute inset-0 overflow-hidden bg-tinta md:relative md:col-start-2 md:aspect-[9/16] md:rounded-3xl">
+      <div class="absolute inset-x-3 top-3 z-10 flex gap-1" aria-hidden="true">
+        <span class="h-0.5 flex-1 overflow-hidden rounded-full bg-white/35"><span class="barra block h-full bg-white"></span></span>
+        <span class="h-0.5 flex-1 rounded-full bg-white/35"></span>
+        <span class="h-0.5 flex-1 rounded-full bg-white/35"></span>
+      </div>
+      <div class="absolute top-7 left-3 z-10 flex items-center gap-2 text-sm font-semibold text-white">
+        <span class="size-8 rounded-full bg-oro ring-2 ring-white"></span>
+        markim
+      </div>
+      <div class="flex h-full items-start justify-center pt-24 md:items-center md:pt-8 bg-[repeating-linear-gradient(135deg,#2a2926_0_14px,#1d1c1a_14px_28px)] p-8 text-center text-sm text-white/70">
+        [[PENDIENTE: video vertical de un trabajo real]]
+      </div>
+      <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 to-transparent md:hidden"></div>
+    </div>
+
+    <div class="relative z-10 px-5 pb-6 text-white md:col-start-1 md:row-start-1 md:p-0 md:text-tinta">
+      <h1 class="font-display text-[3.4rem] leading-[0.92] font-extrabold tracking-tight [font-stretch:75%] md:text-8xl">
+        Contenido que tu cliente ve hasta el final.
+      </h1>
+      <p class="mt-5 max-w-md text-lg text-white/85 md:text-tinta/80">
+        Videos, fotos y redes para negocios de Lima, pensados para el celular de tus clientes.
+      </p>
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener"
+        class="mt-7 mr-[4.5rem] flex items-center md:mr-0 justify-between rounded-full border border-white/70 px-5 py-3.5 text-white md:inline-flex md:gap-4 md:border-tinta md:bg-tinta md:px-7 md:font-semibold"
+      >
+        Escríbenos por WhatsApp
+        <Icon name="whatsapp" class="size-5" />
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .barra {
+      animation: llenar 5s linear forwards;
+    }
+  }
+  @keyframes llenar {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+</style>

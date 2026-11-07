@@ -1,0 +1,64 @@
+---
+// Boceto temporal (ver docs/propuestas-hero.md). Borrar al elegir dirección.
+import '@fontsource-variable/archivo/wdth.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { whatsappUrl } from '../data/site';
+---
+
+<BaseLayout title="Propuesta B: El visor | Markim">
+  <section class="visor bg-tinta px-3 py-3 text-crema md:px-10 md:py-10">
+    <div class="relative mx-auto max-w-7xl px-6 py-14 md:px-16 md:py-20">
+      <!-- esquinas de encuadre -->
+      <span class="absolute top-0 left-0 size-7 border-t-2 border-l-2 border-crema/70" aria-hidden="true"></span>
+      <span class="absolute top-0 right-0 size-7 border-t-2 border-r-2 border-crema/70" aria-hidden="true"></span>
+      <span class="absolute bottom-0 left-0 size-7 border-b-2 border-l-2 border-crema/70" aria-hidden="true"></span>
+      <span class="absolute right-0 bottom-0 size-7 border-r-2 border-b-2 border-crema/70" aria-hidden="true"></span>
+
+      <div class="absolute inset-x-6 top-4 flex items-center justify-between text-sm font-semibold tabular-nums md:inset-x-16" aria-hidden="true">
+        <span class="flex items-center gap-2"><span class="rec size-2.5 rounded-full bg-[#ef4444]"></span>REC</span>
+        <span id="contador">00:00:00</span>
+      </div>
+
+      <h1 class="mt-6 text-[2.6rem] leading-[0.95] font-black tracking-tight [font-stretch:125%] md:text-7xl">
+        Grabamos lo que tu negocio hace bien.
+      </h1>
+
+      <p class="mt-8 max-w-md text-lg text-crema/85">Videos, fotos y redes para negocios de Lima. Vamos a tu local, grabamos y editamos.</p>
+      <a href={whatsappUrl} target="_blank" rel="noopener" class="mt-6 inline-block bg-oro px-7 py-3.5 font-bold text-tinta hover:bg-crema">
+        Cotiza por WhatsApp
+      </a>
+      <div class="mt-8 flex aspect-[4/5] max-h-72 items-center justify-center bg-white/5 p-6 text-center text-sm text-crema/60 outline outline-1 outline-crema/20 md:max-h-none md:w-2/5">
+        [[PENDIENTE: foto de Kimberly grabando]]
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .visor h1,
+  .visor p,
+  .visor a,
+  .visor span {
+    font-family: 'Archivo Variable', var(--font-sans);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .rec {
+      animation: parpadeo 1s steps(1) infinite;
+    }
+  }
+  @keyframes parpadeo {
+    50% { opacity: 0; }
+  }
+</style>
+
+<script>
+  // El contador avanza solo si el usuario no pidió reducir movimiento.
+  const el = document.getElementById('contador');
+  if (el && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const inicio = Date.now();
+    setInterval(() => {
+      const s = Math.floor((Date.now() - inicio) / 1000);
+      el.textContent = [s / 3600, (s / 60) % 60, s % 60].map((n) => String(Math.floor(n)).padStart(2, '0')).join(':');
+    }, 1000);
+  }
+</script>
