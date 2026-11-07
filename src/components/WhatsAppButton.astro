@@ -8,10 +8,32 @@ import { whatsappUrl } from '../data/site';
   target="_blank"
   rel="noopener"
   aria-label="¿En qué podemos ayudarte? Escríbenos por WhatsApp"
-  class="animate-flotar fixed right-5 bottom-5 z-50 flex items-center gap-2"
+  class="wa animate-flotar fixed right-5 bottom-5 z-50 flex items-center gap-2"
 >
-  <span class="hidden rounded-full bg-white px-5 py-3 text-xs font-bold shadow-xl md:block">¿En qué podemos ayudarte?</span>
+  <span class="burbuja hidden rounded-full bg-white px-5 py-3 text-xs font-bold shadow-xl md:block">¿En qué podemos ayudarte?</span>
   <span class="flex size-14 items-center justify-center rounded-full bg-[#128c7e] text-white shadow-lg transition-transform hover:scale-110">
     <Icon name="whatsapp" class="size-8" />
   </span>
 </a>
+
+<style>
+  /* La burbuja se ve unos segundos al cargar y luego solo con hover/foco, para no tapar el footer. */
+  .burbuja {
+    animation: burbuja 5s forwards;
+  }
+  /* !important le gana a la animación sin reiniciarla, así al salir vuelve a quedar oculta */
+  .wa:hover .burbuja,
+  .wa:focus-visible .burbuja {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  @keyframes burbuja {
+    0%, 80% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .burbuja {
+      animation-timing-function: step-end;
+    }
+  }
+</style>
