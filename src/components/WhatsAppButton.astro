@@ -1,0 +1,17 @@
+---
+import Icon from './Icon.astro';
+import { whatsappUrl } from '../data/site';
+---
+
+<a
+  href={whatsappUrl}
+  target="_blank"
+  rel="noopener"
+  aria-label="¿En qué podemos ayudarte? Escríbenos por WhatsApp"
+  class="animate-flotar fixed right-5 bottom-5 z-50 flex items-center gap-2"
+>
+  <span class="hidden rounded-full bg-white px-5 py-3 text-xs font-bold shadow-xl md:block">¿En qué podemos ayudarte?</span>
+  <span class="flex size-14 items-center justify-center rounded-full bg-[#128c7e] text-white shadow-lg transition-transform hover:scale-110">
+    <Icon name="whatsapp" class="size-8" />
+  </span>
+</a>
