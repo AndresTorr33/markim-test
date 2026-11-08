@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+import logoBlanco from '../assets/logo-markim-blanco.png';
+import Icon from './Icon.astro';
+import { site, url } from '../data/site';
+
+const servicios = ['Pack Videos', 'Pack Fotos', 'Edición', 'Gestión de RR.SS.', 'Plan de Marketing', 'Asistencia de Marca'];
+---
+
+<footer class="bg-tinta py-12 text-crema/80">
+  <div class="mx-auto grid max-w-7xl gap-10 px-4 md:grid-cols-3 md:px-10">
+    <div>
+      <Image src={logoBlanco} alt="Markim" height={32} class="h-8 w-auto" />
+      <p class="mt-6 text-sm leading-relaxed">{site.descripcion}</p>
+      <div class="mt-6 flex gap-3">
+        <a href={site.redes.instagram} target="_blank" rel="noopener" aria-label="Instagram de Markim" class="flex size-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-oro hover:text-tinta">
+          <Icon name="instagram" />
+        </a>
+        <a href={site.redes.tiktok} target="_blank" rel="noopener" aria-label="TikTok de Markim" class="flex size-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-oro hover:text-tinta">
+          <Icon name="tiktok" />
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="mb-6 inline-block border-b-2 border-oro text-sm font-bold text-white uppercase">Servicios</h2>
+      <ul class="space-y-3 text-sm">
+        {servicios.map((s) => <li><a href={url('/servicios')} class="hover:text-oro">{s}</a></li>)}
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="mb-6 inline-block border-b-2 border-oro text-sm font-bold text-white uppercase">Contacto</h2>
+      <ul class="space-y-4 text-sm">
+        <li class="flex gap-3"><Icon name="pin" class="mt-0.5 size-5 shrink-0 text-oro" />{site.direccion}</li>
+        <li><a href={`tel:${site.telefono.replace(/[^+\d]/g, '')}`} class="flex gap-3 hover:text-oro"><Icon name="phone" class="size-5 shrink-0 text-oro" />{site.telefono}</a></li>
+        <li><a href={`mailto:${site.email}`} class="flex gap-3 break-all hover:text-oro"><Icon name="mail" class="size-5 shrink-0 text-oro" />{site.email}</a></li>
+        <li class="flex gap-3"><Icon name="clock" class="mt-0.5 size-5 shrink-0 text-oro" /><span>{site.horario.map((h) => <span class="block">{h}</span>)}</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mx-auto mt-12 max-w-7xl border-t border-white/10 px-4 pt-8 text-xs md:px-10">
+    <p>&copy; {new Date().getFullYear()} {site.nombre}. Todos los derechos reservados.</p>
+  </div>
+</footer>

@@ -1,0 +1,102 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo-markim.png';
+import Icon from './Icon.astro';
+import { site, url } from '../data/site';
+
+const actual = Astro.url.pathname.replace(/\/$/, '') || '/';
+const esActual = (href: string) => (url(href).replace(/\/$/, '') || '/') === actual;
+---
+
+<div class="bg-tinta text-crema text-sm">
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 md:px-10">
+    <div class="flex min-w-0 items-center gap-5">
+      <a href={`mailto:${site.email}`} class="flex min-w-0 items-center gap-2 hover:text-oro">
+        <Icon name="mail" class="size-4 shrink-0 text-oro" />
+        <span class="truncate">{site.email}</span>
+      </a>
+      <a href={`tel:${site.telefono.replace(/[^+\d]/g, '')}`} class="hidden items-center gap-2 hover:text-oro md:flex">
+        <Icon name="phone" class="size-4 text-oro" />
+        {site.telefono}
+      </a>
+    </div>
+    <div class="flex shrink-0 items-center gap-1">
+      <a href={site.redes.instagram} target="_blank" rel="noopener" aria-label="Instagram de Markim" class="p-1.5 hover:text-oro">
+        <Icon name="instagram" class="size-4" />
+      </a>
+      <a href={site.redes.tiktok} target="_blank" rel="noopener" aria-label="TikTok de Markim" class="p-1.5 hover:text-oro">
+        <Icon name="tiktok" class="size-4" />
+      </a>
+    </div>
+  </div>
+</div>
+
+<header class="sticky top-0 z-40 bg-crema shadow-md">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-10">
+    <a href={url('/')} class="block">
+      <Image src={logo} alt="Markim, agencia de marketing" height={56} loading="eager" class="h-10 w-auto md:h-14" />
+    </a>
+
+    <nav aria-label="Principal" class="hidden md:block">
+      <ul class="flex gap-8 text-xs font-bold tracking-wider uppercase">
+        {site.nav.map(({ href, label }) => (
+          <li>
+            <a
+              href={url(href)}
+              aria-current={esActual(href) ? 'page' : undefined}
+              class="py-2 transition-colors hover:text-oro-oscuro aria-[current=page]:text-oro-oscuro"
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <button
+      id="menu-btn"
+      type="button"
+      class="-mr-2 p-2 md:hidden"
+      aria-expanded="false"
+      aria-controls="menu-movil"
+      aria-label="Abrir menú"
+    >
+      <Icon name="menu" class="size-7" />
+    </button>
+  </div>
+
+  <nav id="menu-movil" aria-label="Principal" class="border-t border-tinta/10 px-6 py-4 shadow-xl md:hidden" hidden>
+    <ul class="flex flex-col text-sm font-bold uppercase">
+      {site.nav.map(({ href, label }) => (
+        <li>
+          <a
+            href={url(href)}
+            aria-current={esActual(href) ? 'page' : undefined}
+            class="block py-3 hover:text-oro-oscuro aria-[current=page]:text-oro-oscuro"
+          >
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-btn')!;
+  const menu = document.getElementById('menu-movil')!;
+
+  const abrir = (abierto: boolean) => {
+    menu.hidden = !abierto;
+    btn.setAttribute('aria-expanded', String(abierto));
+    btn.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
+  };
+
+  btn.addEventListener('click', () => abrir(menu.hidden));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !menu.hidden) {
+      abrir(false);
+      btn.focus();
+    }
+  });
+</script>
