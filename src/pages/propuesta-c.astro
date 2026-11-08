@@ -1,0 +1,32 @@
+---
+// Boceto temporal (ver docs/propuestas-hero.md). Borrar al elegir dirección.
+import '@fontsource/bowlby-one';
+import '@fontsource-variable/figtree';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { whatsappUrl } from '../data/site';
+---
+
+<BaseLayout title="Propuesta C: Cartel de Lima | Markim">
+  <section class="cartel mx-auto max-w-7xl px-4 pt-14 pb-16 md:px-10 md:py-20">
+    <h1 class="text-[11.5vw] leading-none whitespace-nowrap md:text-[8.5rem]">
+      <span class="block w-fit bg-oro px-2 pt-2 pb-1 text-tinta">Tu negocio</span>
+      <span class="block w-fit bg-tinta px-2 pt-2 pb-1 text-crema">merece</span>
+      <span class="block w-fit bg-oro px-2 pt-2 pb-1 text-tinta">que lo vean</span>
+    </h1>
+    <p class="mt-8 max-w-md text-lg">Videos, fotos y redes para negocios de Lima. Hechos acá, para tus clientes de acá.</p>
+    <a href={whatsappUrl} target="_blank" rel="noopener" class="mt-7 inline-block bg-tinta px-7 py-4 text-lg font-bold text-crema hover:bg-oro hover:text-tinta">
+      Escríbenos por WhatsApp
+    </a>
+  </section>
+</BaseLayout>
+
+<style>
+  .cartel h1 {
+    font-family: 'Bowlby One', var(--font-display);
+    text-transform: uppercase;
+  }
+  .cartel p,
+  .cartel a {
+    font-family: 'Figtree Variable', var(--font-sans);
+  }
+</style>
